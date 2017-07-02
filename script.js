@@ -6,7 +6,7 @@ const form = document.getElementById('unipart-calc');
 const operators = ['/', 'x', '-', '+'];
 
 for (let i = 0; i < btns.length; i++){
-	btns[i].addEventListener('click', function(){
+	btns[i].addEventListener('touchstart', function(){
 		const val = this.value;
 
 		if (form.input.value.indexOf('=') > -1){
@@ -51,19 +51,23 @@ function sign(){
 
 /** @function powerOf */
 function powerOf(){
-	form.input.value += '^';
+	if (validate('', 'lastIsNb')){
+		form.input.value += '^';
+	}
 }
 
 /** @function sqrt */
 function sqrt(){
-	if (validate(form.input.value, 'sqrt')){
+	if (validate(form.input.value, 'sqrt') && validate('', 'lastIsNb')){
 		form.input.value += '√';
 	}
 }
 
 /** @function percent */
 function percent(){
-	form.input.value += '%';
+	if (validate('', 'lastIsNb')){
+		form.input.value += '%';
+	}
 }
 
 /** @function clear */
@@ -97,7 +101,7 @@ function equal(){
 					}
 				}
 
-				valArr[i] = (eval(prevVal) / 100) * 50;
+				valArr[i] = (eval(prevVal) / 100) * valArr[i].split('%')[0];
 			}
 		}
 
@@ -144,12 +148,11 @@ function splitLastNb(str){
  */
 function validate(oper, type){
 	let valid = true;
+	let inputLastChar = lastChar(form.input.value);
 	const lastNb = splitLastNb(form.input.value)[1];
 
 	if (type === 'operator'){
-		let inputLastChar = lastChar(form.input.value);
-		
-		if (oper !== inputLastChar && isNaN(parseFloat(inputLastChar)) && inputLastChar !== '√' && inputLastChar !== '^'){
+		if (oper !== inputLastChar && isNaN(parseFloat(inputLastChar)) && inputLastChar !== '√' && inputLastChar !== '^' && inputLastChar !== '%'){
 			form.input.value = form.input.value.trim().slice(0, -2);
 			inputLastChar = lastChar(form.input.value);
 		}
@@ -158,7 +161,6 @@ function validate(oper, type){
 			addToInput(' ' + oper + ' ');
 		}
 	} else if (type === 'sqrt'){
-
 		if (lastNb.indexOf('-') > -1){
 			alert('Negative square root number cannot be evaluated.')
 			valid = false;
@@ -172,6 +174,10 @@ function validate(oper, type){
 		if (form.input.value === '' || isNaN(parseFloat(lastNb)) || lastNb.indexOf('.') > -1){
 			valid = false;
 		} 
+	} else if (type === 'lastIsNb') {
+		if (isNaN(parseFloat(inputLastChar))){
+			valid = false;
+		}
 	}
 
 	return valid;
