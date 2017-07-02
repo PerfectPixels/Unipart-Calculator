@@ -1,0 +1,102 @@
+html, body {
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 16px;
+	font-weight: 100;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+form {
+	background-color: #fbfbfb;
+	max-width: 800px;
+	width: 100%;
+	height: 100%;
+	margin: 0 auto;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+}
+
+button {
+	background-color: transparent;
+	font-size: 36px;
+	font-weight: 100;
+	color: #c0c2c5;
+    width: 100%;
+    height: 70px;
+    padding: 0;
+	position: relative;
+	border: none;
+	cursor: pointer;
+	transition: transform 200ms ease;
+	transform: scale3d(1,1,1);
+	-webkit-appearance: none;
+	outline: none;
+}
+
+button:active {
+	background-color: transparent;
+	color: #79b7f2;
+	transform: scale3d(1.3,1.3,1.3);
+	-webkit-tap-highlight-color: transparent;
+}
+
+sup {
+	font-size: 22px;
+}
+
+input {
+	background-color: transparent;
+	border: none;
+	font-weight: 100;
+}
+
+header {
+	background-color: #f7f7f7;
+	flex: 2 2 auto;
+	padding: 30px 30px 23px;
+}
+
+#input,
+#output {
+	font-size: 18px;
+    color: #aaa;
+    width: 100%;
+    text-align: right;
+}
+
+#output {
+	font-size: 65px;
+	color: #000;
+	margin: -5px 0 0;
+}
+
+#equal {
+	background: linear-gradient(to right, #8680e6 0%,#79b7f2 100%);
+	font-size: 40px;
+	font-weight: 300;
+	color: #fff;
+	height: 80px;
+	flex: 1 1 80px;
+	padding-bottom: 6px;
+}
+
+#buttons {
+	background: linear-gradient(to bottom, #4e5364 0%,#22262f 100%);;
+	list-style: none;
+	margin: 0;
+	padding: 44px 0;
+	flex: 0 5 auto;
+}
+
+#buttons li {
+	display: inline-block;
+	width: 25%;
+	margin: 0 -4px 0 0;
+}
